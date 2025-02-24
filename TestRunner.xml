@@ -1,0 +1,127 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TCrunner">
+    <test name="Testcase01">
+        <classes>
+            <class name="Tests.TC_01"/>
+        </classes>
+    </test>
+    <test name="Testcase02">
+        <classes>
+            <class name="Tests.TC_02"/>
+        </classes>
+    </test>
+    <test name="Testcase03">
+        <classes>
+            <class name="Tests.TC_03"/>
+        </classes>
+    </test>
+    <test name="Testcase04">
+        <classes>
+            <class name="Tests.TC_04"/>
+        </classes>
+    </test>
+    <test name="Testcase05">
+        <classes>
+            <class name="Tests.TC_05"/>
+        </classes>
+    </test>
+    <test name="Testcase06">
+    <classes>
+        <class name="Tests.TC_06"/>
+    </classes>
+</test>
+    <test name="Testcase07">
+        <classes>
+            <class name="Tests.TC_07"/>
+        </classes>
+    </test>
+    <test name="Testcase08">
+        <classes>
+            <class name="Tests.TC_08"/>
+        </classes>
+    </test>
+    <test name="Testcase09">
+        <classes>
+            <class name="Tests.TC_09"/>
+        </classes>
+    </test>
+    <test name="Testcase10">
+        <classes>
+            <class name="Tests.TC_10"/>
+        </classes>
+    </test>
+    <test name="Testcase11">
+        <classes>
+            <class name="Tests.TC_11"/>
+        </classes>
+    </test>
+    <test name="Testcase12">
+        <classes>
+            <class name="Tests.TC_12"/>
+        </classes>
+    </test>
+    <test name="Testcase13">
+        <classes>
+            <class name="Tests.TC_13"/>
+        </classes>
+    </test>
+    <test name="Testcase14">
+        <classes>
+            <class name="Tests.TC_14"/>
+        </classes>
+    </test>
+    <test name="Testcase15">
+        <classes>
+            <class name="Tests.TC_15"/>
+        </classes>
+    </test>
+    <test name="Testcase16">
+        <classes>
+            <class name="Tests.TC_16"/>
+        </classes>
+    </test>
+    <test name="Testcase17">
+        <classes>
+            <class name="Tests.TC_17"/>
+        </classes>
+    </test>
+    <test name="Testcase18">
+        <classes>
+            <class name="Tests.TC_18"/>
+        </classes>
+    </test>
+    <test name="Testcase19">
+        <classes>
+            <class name="Tests.TC_19"/>
+        </classes>
+    </test>
+    <test name="Testcase20">
+        <classes>
+            <class name="Tests.TC_20"/>
+        </classes>
+    </test>
+    <test name="Testcase21">
+        <classes>
+            <class name="Tests.TC_21"/>
+        </classes>
+    </test>
+    <test name="Testcase22">
+        <classes>
+            <class name="Tests.TC_22"/>
+        </classes>
+    </test>
+    <test name="Testcase23">
+        <classes>
+            <class name="Tests.TC_23"/>
+        </classes>
+    </test>
+    <test name="Testcase24">
+        <classes>
+            <class name="Tests.TC_24"/>
+        </classes>
+    </test>
+
+
+
+
+</suite>

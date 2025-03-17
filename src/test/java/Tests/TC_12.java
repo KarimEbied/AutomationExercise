@@ -1,8 +1,6 @@
 package Tests;
 
 import Pages.P05_ProductsPage;
-import Pages.P06_CartPage;
-import Utilities.DataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +11,7 @@ public class TC_12 extends BaseTest{
 
     public void AddProductsInCart(){
         P05_ProductsPage productsPage = new P05_ProductsPage(getDriver());
-        productsPage.AddProducts();
+        productsPage.navigateToProductspage().AddProducts();
         Assert.assertEquals(productsPage.getFPrice(),500);
         Assert.assertEquals(productsPage.getSPrice(),400);
     }

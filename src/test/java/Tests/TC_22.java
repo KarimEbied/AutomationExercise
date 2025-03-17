@@ -1,7 +1,6 @@
 package Tests;
 
 import Pages.P02_HomePage;
-import Pages.P05_ProductsPage;
 import Utilities.DataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -1,9 +1,6 @@
 package Tests;
 
-import Pages.P01_RegisterPage;
-import Pages.P02_HomePage;
 import Pages.P06_CartPage;
-import Utilities.DataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

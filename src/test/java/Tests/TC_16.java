@@ -20,9 +20,12 @@ public class TC_16 extends BaseTest {
 
     @Test
     public void PlaceOrderLoginBeforeCheckout() throws InterruptedException {
-        new P01_RegisterPage(getDriver()).navigateToLoginPage().validLogin(mail, pass).AddProductsHomePage();
-        Assert.assertEquals(new P06_CartPage(getDriver()).Checkout(text, nameCard, CardNumber, CVC, EXP, YY), "ORDER PLACED!");
-        new P06_CartPage(getDriver()).orderPlaced();
+        Assert.assertEquals(new P01_RegisterPage(getDriver())
+                .navigateToLoginPage()
+                .validLogin(mail, pass)
+                .AddProductsHomePage().NavigateToCartPage()
+                .Checkout(text, nameCard, CardNumber, CVC, EXP, YY)
+                , "ORDER PLACED!");
         //  .DeleteACC();
         //Assert.assertEquals("ACCOUNT DELETED!",new P02_HomePage(getDriver()).VerifyAccDeleted());
 

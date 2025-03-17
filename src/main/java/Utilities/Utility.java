@@ -1,5 +1,4 @@
 package Utilities;
-import Pages.P02_HomePage;
 import com.assertthat.selenium_shutterbug.core.Capture;
 import com.assertthat.selenium_shutterbug.core.Shutterbug;
 import io.qameta.allure.Allure;
@@ -22,32 +21,30 @@ import java.util.Date;
 import static DriverFactory.DriverFactory.getDriver;
 import static Utilities.WaitsUtils.explicitlyWaitForVisibility;
 
-
 public class Utility {
     private static final String SCREENSHOTS_PATH = "test-outputs/Screenshots/";
 
     // ToDo: Clicking on Element Function
-    public static P02_HomePage ClickingOnElement(WebDriver driver, WebElement locator) {
+    public static void ClickingOnElement(WebDriver driver, By locator) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(locator));
-        locator.click();
-        return null;
+        driver.findElement(locator).click();
     }
 
     // ToDo: Sending data Function
-    public static void SendData(WebDriver driver, WebElement locator, String data) {
+    public static void SendData(WebDriver driver, By locator, String data) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(locator));
-        locator.sendKeys(data);
+        driver.findElement(locator).sendKeys(data);
 
     }
 
 
     //ToDo: Get Text
-    public static String getText(WebDriver driver, WebElement locator) {
+    public static String getText(WebDriver driver, By locator) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOf(locator));
-        return locator.getText();
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return driver.findElement(locator).getText();
     }
 
     //ToDo: General Wait
@@ -57,8 +54,8 @@ public class Utility {
 
     //ToDo: Scrolling
     public static void scrollin
-    (WebDriver driver, WebElement locator) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", locator);
+    (WebDriver driver, By locator) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", findWebElement(driver, locator));
     }
 
     //ToDo:Convert Locator to Web Element
@@ -89,10 +86,10 @@ public class Utility {
     }
 
     //ToDo: Select from DropDown
-    public static void selectingFromDropDown(WebDriver driver, WebElement locator, String option) {
+    public static void selectingFromDropDown(WebDriver driver, By locator, String option) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOf(locator));
-        new Select(locator).selectByVisibleText(option);
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+        new Select(findWebElement(driver, locator)).selectByVisibleText(option);
 
     }
 
@@ -119,8 +116,8 @@ public class Utility {
     }
 
     //ToDo:Checking exist data.
-    public static boolean verifyEquals(WebElement locator, String expectedText) {
-        return getText(getDriver(),(locator)).equals(expectedText);
+    public static boolean verifyEquals(By locator, String expectedText) {
+        return getText(getDriver(), locator).equals(expectedText);
     }
 
     //ToDo:Checking exist URL

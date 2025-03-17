@@ -2,67 +2,43 @@ package Pages;
 
 import Utilities.Utility;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
 
-public class P02_HomePage {
+public class P02_HomePage  {
     private final WebDriver driver;
 
 
-    @FindBy(css = "a[href='/delete_account']")
-    private WebElement DeleteAccBtn;
-    @FindBy(xpath = "//b")
-    private WebElement AccDeletedMsg;
-    @FindBy(xpath = "//u")
-    private WebElement Register;
-    @FindBy(css = "div[class='single-widget'] h2")
-    private WebElement Subscription;
-    @FindBy(id = "susbscribe_email")
-    private WebElement SubsMail;
-    @FindBy(id = "subscribe")
-    private WebElement SubsBTN;
-    @FindBy(id = "success-subscribe")
-    private WebElement SubsMSG;
-    @FindBy(id = "quantity")
-    private WebElement Quantity;
-    @FindBy(xpath = "//button[@type='button']")
-    private WebElement AddToCart;
-    @FindBy(xpath = "(//button[@class='disabled'])" + "[1]")
-    private WebElement FQuantity;
-    @FindBy(xpath = "//u")
-    private WebElement viewCartBtn;
-    @FindBy(css = "a[href='/product_details/1']")
-    private WebElement FproductDetail;
-    @FindBy(xpath = "(//a[@data-product-id='1'])[1]")
-    private WebElement Fproduct;
-    @FindBy(xpath = "(//a[@data-product-id='2'])[1]")
-    private WebElement Sproduct;
-    @FindBy(xpath = "//button[@data-dismiss='modal']")
-    private WebElement ContinueShoppingBTN;
-    @FindBy(xpath = "//a[@class]")
-    private WebElement ProceedtoCheckoutBTN;
-    @FindBy(css = "a[href='/view_cart']")
-    private WebElement ViewCartBtn;
-    @FindBy(xpath = "//a[@data-qa]")
-    private WebElement AccCreatedContinueBtn;
-    @FindBy(css = "a[href='#Women']")
-    private WebElement womenCategory;
-    @FindBy(css = "a[href='#Men']")
-    private WebElement menCategory;
-    @FindBy(css = "a[href='/category_products/1']")
-    private WebElement dressCategory;
-    @FindBy(css = "a[href='/category_products/3']")
-    private WebElement TshirtsCategory;
-    @FindBy(xpath = "//h2[@class]")
-    private WebElement dressMSG;
+    private By DeleteAccBtn = By.cssSelector("a[href='/delete_account']");
+    private By LoginBTN = By.cssSelector("a[href='/login']");
+    private By AccDeletedMsg = By.xpath("//b");
+    private By Register = By.xpath("//u");
+    private By Subscription = By.cssSelector("div[class='single-widget'] h2");
+    private By SubsMail = By.id("susbscribe_email");
+    private By SubsBTN = By.id("subscribe");
+    private By SubsMSG = By.id("success-subscribe");
+    private By Quantity = By.id("quantity");
+    private By AddToCart = By.xpath("//button[@type='button']");
+    private By FQuantity = By.xpath("(//button[@class='disabled'])" + "[1]");
+    private By viewCartBtn = By.xpath("//u");
+    private By FproductDetail = By.cssSelector("a[href='/product_details/1']");
+    private By Fproduct = By.xpath("(//a[@data-product-id='1'])[1]");
+    private By Sproduct = By.xpath("(//a[@data-product-id='2'])[1]");
+    private By ContinueShoppingBTN = By.xpath("//button[@data-dismiss='modal']");
+    private By ProceedtoCheckoutBTN = By.xpath("//a[@class]");
+    private By ViewCartBtn =By.cssSelector("a[href='/view_cart']");
+    private By AccCreatedContinueBtn = By.xpath("//a[@data-qa]");
+    private By womenCategory = By.cssSelector("a[href='#Women']");
+    private By menCategory = By.cssSelector("a[href='#Men']");
+    private By dressCategory = By.cssSelector("a[href='/category_products/1']");
+    private By TshirtsCategory = By.cssSelector("a[href='/category_products/3']");
+    private By dressMSG = By.xpath("//h2[@class]");
 
     public P02_HomePage(WebDriver driver) {
-        super();
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
 
@@ -87,8 +63,9 @@ public class P02_HomePage {
     }
 
     public String VerifyProductQuantityInCart(String number) {
+        Utility.scrollin(driver, Fproduct);
         Utility.ClickingOnElement(driver, FproductDetail);
-        Quantity.clear();
+        driver.findElement(Quantity).clear();
         Utility.SendData(driver, Quantity, number);
         Utility.ClickingOnElement(driver, AddToCart);
         Utility.ClickingOnElement(driver, viewCartBtn);
@@ -108,6 +85,7 @@ public class P02_HomePage {
 
     }
 
+
     public P06_CartPage PlaceOrderBeforeCheckout() {
         Utility.ClickingOnElement(driver, AccCreatedContinueBtn);
         Utility.scrollin(driver, Fproduct);
@@ -120,15 +98,21 @@ public class P02_HomePage {
         return new P06_CartPage(driver);
     }
 
-    public P06_CartPage AddProductsHomePage() {
+    public P02_HomePage AddProductsHomePage() {
         Utility.scrollin(driver, Fproduct);
         Utility.ClickingOnElement(driver, Fproduct);
         Utility.ClickingOnElement(driver, ContinueShoppingBTN);
         Utility.ClickingOnElement(driver, Sproduct);
-        Utility.ClickingOnElement(driver, ViewCartBtn);
-        Utility.ClickingOnElement(driver, ProceedtoCheckoutBTN);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        return this;
+    }
+    public P06_CartPage NavigateToCartPage(){
+        Utility.ClickingOnElement(driver, ViewCartBtn);
         return new P06_CartPage(driver);
+    }
+    public P01_RegisterPage navigateToLoginPage() {
+        Utility.ClickingOnElement(driver, LoginBTN);
+        return new P01_RegisterPage(driver);
     }
 
     public String VerifyWomenDressProducts() {

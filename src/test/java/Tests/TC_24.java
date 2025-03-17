@@ -37,7 +37,7 @@ public class TC_24 extends BaseTest{
     homePage.PlaceOrderWhileCheckout().Signup(Name,mail).EntetACCiNf(pass,day,month,year,Name,Lname,company,Add1,Add2,country,state,city,zip,mobile).
             createACC();
     Assert.assertEquals("ACCOUNT CREATED!",new P01_RegisterPage(getDriver()).VerifyACcCreated());
-    Assert.assertEquals(new P06_CartPage(getDriver()).CheckoutWhileRegister(text,nameCard,CardNumber,CVC,EXP,YY),"ORDER PLACED!");
+    Assert.assertEquals(homePage.NavigateToCartPage().Checkout(text,nameCard,CardNumber,CVC,EXP,YY),"ORDER PLACED!");
     new P06_CartPage(getDriver()).orderPlaced().DeleteACC();
     Assert.assertEquals("ACCOUNT DELETED!",homePage.VerifyAccDeleted());
 

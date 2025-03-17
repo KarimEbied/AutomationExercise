@@ -2,7 +2,7 @@ package Pages;
 
 import Utilities.Utility;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,29 +12,21 @@ public class P03_ContactUSPage {
     private final WebDriver driver;
 
 
-    @FindBy(css = "a[href='/contact_us']")
-    private WebElement ContactUSBtn;
-    @FindBy(css = "h2.title:nth-child(2)")
-    private WebElement GetInTouchMSG;
+    private By ContactUSBtn = By.cssSelector("a[href='/contact_us']");
+    private By GetInTouchMSG = By.cssSelector("h2.title:nth-child(2)");
     @FindBy(xpath = "//input[@name='name']")
-    private WebElement NameFiled;
-    @FindBy(xpath = "//input[@name='email']")
-    private WebElement emailFiled;
-    @FindBy(xpath = "//input[@name='subject']")
-    private WebElement SubjectFiled;
-    @FindBy(id = "message")
-    private WebElement MsgHere;
-    @FindBy(xpath = "//input[@type='file']")
-    private WebElement ChooseFile;
-    @FindBy(xpath = "//input[@data-qa='submit-button']")
-    private WebElement SubmitBtn;
+    private By NameFiled = By.xpath("//input[@name='name']");
+    private By emailFiled = By.xpath("//input[@name='email']");
+    private By SubjectFiled = By.xpath("//input[@name='subject']");
+    private By MsgHere = By.id("message");
+    private By ChooseFile = By.xpath("//input[@type='file']");
+    private By SubmitBtn = By.xpath("//input[@data-qa='submit-button']");
     @FindBy(xpath = "//div[@class='status alert alert-success']")
-    private WebElement SuccessMsg;
+    private By SuccessMsg = By.xpath("//div[@class='status alert alert-success']");
 
     public P03_ContactUSPage(WebDriver driver) {
         super();
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
 

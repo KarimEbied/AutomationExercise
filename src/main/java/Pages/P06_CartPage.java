@@ -2,7 +2,7 @@ package Pages;
 
 import Utilities.Utility;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,57 +12,35 @@ public class P06_CartPage {
     private final WebDriver driver;
 
 
-    @FindBy(css = "a[href='/view_cart']")
-    private WebElement CartBTN;
-    @FindBy(css = "a[href='/payment']")
-    private WebElement PaymentBTN;
-    @FindBy(xpath = "//b")
-    private WebElement CartEmptyMSG;
-    @FindBy(css = "div[class='single-widget'] h2")
-    private WebElement Subscription;
-    @FindBy(id = "susbscribe_email")
-    private WebElement SubsMail;
-    @FindBy(id = "subscribe")
-    private WebElement SubsBTN;
-    @FindBy(id = "success-subscribe")
-    private WebElement SubsMSG;
-    @FindBy(xpath = "//a[@data-qa]")
-    private WebElement AccCreatedContinueBtn;
-    @FindBy(xpath = "//a[@class]")
-    private WebElement ProceedtoCheckoutBTN;
-    @FindBy(xpath = "//textarea[@class='form-control']")
-    private WebElement CommentBox;
-    @FindBy(xpath = "//input[@class='form-control']")
-    private WebElement NameOnCard;
-    @FindBy(xpath = "//input[@name='card_number']")
-    private WebElement CardNumber;
-    @FindBy(xpath = "//input[@name='cvc']")
-    private WebElement CVC;
-    @FindBy(xpath = "//input[@name='expiry_month']")
-    private WebElement EXP;
-    @FindBy(xpath = "//input[@name='expiry_year']")
-    private WebElement YY;
-    @FindBy(id = "submit")
-    private WebElement payAndConfirmBtn;
-    @FindBy(xpath = "(//b)" + "[2]")
-    private WebElement orderMsg;
-    @FindBy(xpath = "//a[@data-qa='continue-button']")
-    private WebElement ContinuBtn;
-    @FindBy(xpath = "//u")
-    private WebElement viewCartBtn;
-    @FindBy(xpath = "(//a[@data-product-id='1'])" + "[1]")
-    private WebElement Fproduct;
-
-    @FindBy(xpath = "//a[@style='cursor: pointer;']")
-    private WebElement RemoveBTN;
-
-    @FindBy(xpath = "//*[@id=\"address_delivery\"]/li[5]")
-    private WebElement DeliveryAdd;
+    private By CartBTN =By.cssSelector("a[href='/view_cart']");
+    private By PaymentBTN = By.cssSelector("a[href='/payment']");
+    private By CartEmptyMSG = By.xpath("//b");
+    private By Subscription = By.cssSelector("div[class='single-widget'] h2");
+    private By SubsMail = By.id("susbscribe_email");
+    private By SubsBTN = By.id("subscribe");
+    private By SubsMSG = By.id("success-subscribe");
+    private By ProceedtoCheckoutBTN = By.xpath("//a[@class]");
+    private By CommentBox = By.xpath("//textarea[@class='form-control']");
+    private By NameOnCard = By.xpath("//input[@class='form-control']");
+    private By CardNumber = By.xpath("//input[@name='card_number']");
+    private By CVC = By.xpath("//input[@name='cvc']");
+    private By EXP = By.xpath("//input[@name='expiry_month']");
+    private By YY = By.xpath("//input[@name='expiry_year']");
+    private By payAndConfirmBtn = By.id("submit");
+    private By orderMsg = By.xpath("(//b)" + "[2]");
+    private By ContinuBtn = By.xpath("//a[@data-qa='continue-button']");
+    private By viewCartBtn = By.xpath("//u");
+    private By Fproduct = By.xpath("(//a[@data-product-id='1'])" + "[1]");
+    private By RemoveBTN = By.xpath("//a[@style='cursor: pointer;']");
+    private By DeliveryAdd = By.xpath("//*[@id=\"address_delivery\"]/li[5]");
+    private By LoginBTN = By.cssSelector("a[href='/login']");
 
     public P06_CartPage(WebDriver driver) {
-        super();
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+    }
+    public P01_RegisterPage navigateToLoginPage() {
+        Utility.ClickingOnElement(driver, LoginBTN);
+        return new P01_RegisterPage(driver);
     }
 
 
@@ -77,28 +55,15 @@ public class P06_CartPage {
         return Utility.getText(driver, SubsMSG);
     }
 
-    public String CheckoutWhileRegister(String comment, String name, String cardNumber, String cvc, String exp, String yy) {
-        Utility.ClickingOnElement(driver, AccCreatedContinueBtn);
-        Utility.ClickingOnElement(driver, CartBTN);
-        Utility.ClickingOnElement(driver, ProceedtoCheckoutBTN);
-        Utility.SendData(driver, CommentBox, comment);
-        Utility.ClickingOnElement(driver, PaymentBTN);
-        Utility.SendData(driver, NameOnCard, name);
-        Utility.SendData(driver, CardNumber, cardNumber);
-        Utility.SendData(driver, CVC, cvc);
-        Utility.SendData(driver, EXP, exp);
-        Utility.SendData(driver, YY, yy);
-        Utility.ClickingOnElement(driver, payAndConfirmBtn);
-        return Utility.getText(driver, orderMsg);
-    }
+
+
 
     public P02_HomePage orderPlaced() {
         Utility.ClickingOnElement(driver, ContinuBtn);
         return new P02_HomePage(driver);
     }
 
-    public String CheckoutBeforeRegister(String comment, String name, String cardNumber, String cvc, String exp, String yy) {
-        Utility.ClickingOnElement(driver, CartBTN);
+    public String Checkout(String comment, String name, String cardNumber, String cvc, String exp, String yy) {
         Utility.ClickingOnElement(driver, ProceedtoCheckoutBTN);
         Utility.SendData(driver, CommentBox, comment);
         Utility.ClickingOnElement(driver, PaymentBTN);
@@ -111,19 +76,10 @@ public class P06_CartPage {
         return Utility.getText(driver, orderMsg);
     }
 
-    public String Checkout(String comment, String name, String cardNumber, String cvc, String exp, String yy) {
-        Utility.SendData(driver, CommentBox, comment);
-        Utility.ClickingOnElement(driver, PaymentBTN);
-        Utility.SendData(driver, NameOnCard, name);
-        Utility.SendData(driver, CardNumber, cardNumber);
-        Utility.SendData(driver, CVC, cvc);
-        Utility.SendData(driver, EXP, exp);
-        Utility.SendData(driver, YY, yy);
-        Utility.ClickingOnElement(driver, payAndConfirmBtn);
-        return Utility.getText(driver, orderMsg);
-    }
 
-    public String RemoveProductsFromCart() throws InterruptedException {
+
+    public String RemoveProductsFromCart()  {
+        Utility.scrollin(driver, Fproduct);
         Utility.ClickingOnElement(driver, Fproduct);
         Utility.ClickingOnElement(driver, viewCartBtn);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

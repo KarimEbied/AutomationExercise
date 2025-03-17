@@ -2,62 +2,41 @@ package Pages;
 
 import Utilities.Utility;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
+
+import java.time.Duration;
 import java.util.List;
 
 public class P05_ProductsPage {
     private final WebDriver driver;
 
 
-    @FindBy(css = "a[href='/products']")
-    private WebElement ProductsBtn;
-    @FindBy(css = "a[href='/brand_products/Polo']")
-    private WebElement PoloBTN;
-    @FindBy(css = "a[href='/brand_products/Madame']")
-    private WebElement MadamaBTN;
-    @FindBy(css = "a[href='/product_details/1']")
-    private WebElement FproductDetail;
-    @FindBy(xpath = "(//b)" + "[2]")
-    private WebElement condition;
-    @FindBy(xpath = "(//a[@data-product-id='1'])[1]")
-    private WebElement Fproduct;
-    @FindBy(xpath = "(//a[@data-product-id='2'])[1]")
-    private WebElement Sproduct;
-    @FindBy(xpath = "//button[@data-dismiss='modal']")
-    private WebElement ContinueShoppingBTN;
-    @FindBy(css = "a[href='/view_cart']")
-    private WebElement ViewCartBtn;
-    @FindBy(xpath = "//u")
-    private WebElement viewCartBtn;
-    @FindBy(xpath = "(//td[@class='cart_price'])[1]")
-    private WebElement FproductPrice;
-    @FindBy(xpath = "(//td[@class='cart_price'])" + "[2]")
-    private WebElement SproductPrice;
-    @FindBy(id = "search_product")
-    private WebElement SearchBar;
-    @FindBy(id = "submit_search")
-    private WebElement SearchBTN;
-    @FindBy(xpath = "//div[@class='single-products']")
-    private
-    List<WebElement> products;
-    @FindBy(id = "name")
-    private WebElement Name;
-    @FindBy(id = "email")
-    private WebElement Email;
-    @FindBy(id = "review")
-    private WebElement Review;
-    @FindBy(id = "button-review")
-    private WebElement SubmitBTN;
-    @FindBy(xpath = "//span[@style='font-size: 20px;']")
-    private WebElement reviewMsg;
+    private By ProductsBtn = By.cssSelector("a[href='/products']");
+    private By PoloBTN = By.cssSelector("a[href='/brand_products/Polo']");
+    private By MadamaBTN = By.cssSelector("a[href='/brand_products/Madame']");
+    private By FproductDetail = By.cssSelector("a[href='/product_details/1']");
+    private By condition = By.xpath("(//b)" + "[2]");
+    private By Fproduct = By.xpath("(//a[@data-product-id='1'])[1]");
+    private By Sproduct = By.xpath("(//a[@data-product-id='2'])[1]");
+    private By ContinueShoppingBTN = By.xpath("//button[@data-dismiss='modal']");
+    private By ViewCartBtn = By.cssSelector("a[href='/view_cart']");
+    private By viewCartBtn = By.xpath("//u");
+    private By FproductPrice = By.xpath("(//td[@class='cart_price'])[1]");
+    private By SproductPrice = By.xpath("(//td[@class='cart_price'])" + "[2]");
+    private By SearchBar = By.id("search_product");
+    private By SearchBTN = By.id("submit_search");
+    private List<WebElement> SearcedProducts;
+    private By products =By.xpath("//div[@class='single-products']");
+    private By Name =By.id("name");
+    private By Email = By.id("email");
+    private By Review = By.id("review");
+    private By SubmitBTN = By.id("button-review");
+    private By reviewMsg = By.xpath("//span[@style='font-size: 20px;']");
 
     public P05_ProductsPage(WebDriver driver) {
-        super();
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
 
@@ -80,16 +59,23 @@ public class P05_ProductsPage {
     }
 
     public int VerifyAllProductsRelatedToSearchAreVisible() {
-        return products.size();
+        SearcedProducts=driver.findElements(products);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        return SearcedProducts.size();
+    }
+    public P05_ProductsPage navigateToProductspage(){
+        Utility.ClickingOnElement(driver, ProductsBtn);
+        return this;
+
     }
 
-    public void AddProducts() {
-        Utility.ClickingOnElement(driver, ProductsBtn);
+    public P06_CartPage AddProducts() {
         Utility.scrollin(driver, Fproduct);
         Utility.ClickingOnElement(driver, Fproduct);
         Utility.ClickingOnElement(driver, ContinueShoppingBTN);
         Utility.ClickingOnElement(driver, Sproduct);
         Utility.ClickingOnElement(driver, ViewCartBtn);
+        return new P06_CartPage(driver);
     }
 
     public int getFPrice() {

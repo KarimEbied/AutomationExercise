@@ -1,6 +1,5 @@
 package Listeners;
 import Utilities.LogsUtils;
-import org.openqa.selenium.bidi.log.Log;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 

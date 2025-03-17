@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.P01_RegisterPage;
 import Pages.P02_HomePage;
+import Pages.P05_ProductsPage;
 import Pages.P06_CartPage;
 import Utilities.DataUtils;
 import org.testng.Assert;
@@ -34,15 +35,20 @@ public class TC_15 extends BaseTest {
 
     @Test
     public void PlaceOrderBeforeCheckout() throws InterruptedException {
-        P02_HomePage homePage = new P02_HomePage(getDriver());
-        new P01_RegisterPage(getDriver()).navigateToLoginPage().Signup(Name, mail).EntetACCiNf(pass, day, month, year, Name, Lname, company, Add1, Add2, country, state, city, zip, mobile).
-                createACC();
-        Assert.assertEquals("ACCOUNT CREATED!", new P01_RegisterPage(getDriver()).VerifyACcCreated());
-        Assert.assertEquals(homePage.PlaceOrderBeforeCheckout().
-                CheckoutBeforeRegister(text, nameCard, CardNumber, CVC, EXP, YY), "ORDER PLACED!");
+        P01_RegisterPage registerPage=new P01_RegisterPage(getDriver());
+
+
+        Assert.assertEquals(registerPage.navigateToLoginPage().Signup(Name, mail).EntetACCiNf(pass, day, month, year, Name, Lname, company, Add1, Add2, country, state, city, zip, mobile).
+                createACC().VerifyACcCreated(),"ACCOUNT CREATED!");
+        Assert.assertEquals(registerPage.ContinueACcCreated().AddProductsHomePage().NavigateToCartPage()
+                .Checkout(text, nameCard, CardNumber, CVC, EXP, YY)
+                ,"ORDER PLACED!");
         new P06_CartPage(getDriver()).orderPlaced();
-        // .DeleteACC();
-        //Assert.assertEquals("ACCOUNT DELETED!",homePage.VerifyAccDeleted());
+                        //.DeleteACC()
+                      //VerifyAccDeleted()
+                //,"ACCOUNT DELETED!");
+
+
 
 
     }

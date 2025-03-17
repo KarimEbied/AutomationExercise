@@ -35,7 +35,8 @@ public class TC_01 extends BaseTest {
         Assert.assertEquals("New User Signup!", registerPage.VerifyNewUserSignup());
         registerPage.
                 Signup(Name, mail).
-                EntetACCiNf(pass, day, month, year, Name, Lname, company, Add1, Add2, country, state, city, zip, mobile).
+                EntetACCiNf(pass, day, month, year, Name, Lname, company
+                        , Add1, Add2, country, state, city, zip, mobile).
                 createACC();
         Assert.assertEquals("ACCOUNT CREATED!", registerPage.VerifyACcCreated());
         //registerPage.ContinueACcCreated().DeleteACC();

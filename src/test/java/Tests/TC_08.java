@@ -1,6 +1,5 @@
 package Tests;
 
-import Pages.P04_TestCasePage;
 import Pages.P05_ProductsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;

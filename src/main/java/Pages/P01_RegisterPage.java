@@ -1,78 +1,53 @@
 package Pages;
 
 import Utilities.Utility;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.time.Duration;
 
 
 public class P01_RegisterPage {
     private final WebDriver driver;
 
-    @FindBy(css = "a[href='/login']")
-    private WebElement LoginBTN;
-    @FindBy(css = "a[href='/logout']")
-    private WebElement LogoutBTN;
-    @FindBy(css = "div[class='login-form'] h2")
-    private WebElement LoginToYourACC;
-    @FindBy(xpath = "//*[@id=\"form\"]/div/div/div[3]/div/h2")
-    private WebElement NewUserSignup;
-    @FindBy(xpath = "//p[@style]")
-    private WebElement ErrorMSG;
-    @FindBy(xpath = "//input[@data-qa='signup-name']")
-    private WebElement Name;
-    @FindBy(xpath = "//input[@data-qa='signup-email']")
-    private WebElement Email;
-    @FindBy(xpath = "//button[@data-qa='signup-button']")
-    private WebElement SignBtn;
-    @FindBy(id = "id_gender1")
-    private WebElement MR;
-    @FindBy(id = "password")
-    private WebElement infPass;
-    @FindBy(id = "days")
-    private WebElement infDays;
-    @FindBy(id = "months")
-    private WebElement infMonths;
-    @FindBy(id = "years")
-    private WebElement infYears;
-    @FindBy(id = "first_name")
-    private WebElement InfFirstName;
-    @FindBy(id = "last_name")
-    private WebElement InfLastName;
-    @FindBy(id = "company")
-    private WebElement InfCompany;
-    @FindBy(id = "address1")
-    private WebElement InfAddress1;
-    @FindBy(id = "address2")
-    private WebElement InfAddress2;
-    @FindBy(id = "country")
-    private WebElement InfCountry;
-    @FindBy(id = "state")
-    private WebElement InfState;
-    @FindBy(id = "city")
-    private WebElement InfCity;
-    @FindBy(id = "zipcode")
-    private WebElement InfZipCode;
-    @FindBy(id = "mobile_number")
-    private WebElement InfMobileNumber;
-    @FindBy(xpath = "//button[@data-qa='create-account']")
-    private WebElement InfAccCreatedBtn;
-    @FindBy(xpath = "//b")
-    private WebElement AccCreatedMsg;
-    @FindBy(xpath = "//a[@data-qa]")
-    private WebElement AccCreatedContinueBtn;
-    @FindBy(xpath = "//input[@data-qa='login-email']")
-    private WebElement EmailAdd;
-    @FindBy(xpath = "//input[@data-qa='login-password']")
-    private WebElement LoginPass;
-    @FindBy(xpath = "//button[@data-qa='login-button']")
-    private WebElement LoginBtn;
+    private By LoginBTN = By.cssSelector("a[href='/login']");
+    private By LogoutBTN = By.cssSelector("a[href='/logout']");
+    private By LoginToYourACC = By.cssSelector("div[class='login-form'] h2");
+    private By NewUserSignup=By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/h2");
+    private By ErrorMSG = By.xpath("//p[@style]");
+    private By Name = By.xpath("//input[@data-qa='signup-name']");
+    private By Email = By.xpath("//input[@data-qa='signup-email']");
+    private By SignBtn = By.xpath("//button[@data-qa='signup-button']");
+    private By MR = By.id("id_gender1");
+    private By infPass = By.id("password");
+    private By infDays = By.id("days");
+    private By infMonths = By.id("months");
+    private By infYears =By.id("years");
+    private By infNewSletter =By.id("newsletter");
+    private By infOffers =By.id("optin");
+    private By InfFirstName = By.id("first_name");
+    private By InfLastName = By.id("last_name");
+    private By InfCompany = By.id("company");
+    private By InfAddress1 = By.id("address1");
+    private By InfAddress2 = By.id("address2");
+    private By InfCountry = By.id("country");
+    private By InfState = By.id("state");
+    private By InfCity = By.id("city");
+    private By InfZipCode = By.id("zipcode");
+    private By InfMobileNumber = By.id("mobile_number");
+    private By InfAccCreatedBtn = By.xpath("//button[@data-qa='create-account']");
+    private By AccCreatedMsg = By.xpath("//b");
+    private By AccCreatedContinueBtn = By.xpath("//a[@data-qa]");
+    private By EmailAdd = By.xpath("//input[@data-qa='login-email']");
+    private By LoginPass = By.xpath("//input[@data-qa='login-password']");
+    private By LoginBtn = By.xpath("//button[@data-qa='login-button']");
 
 
     public P01_RegisterPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
 
@@ -85,12 +60,14 @@ public class P01_RegisterPage {
 
     public P01_RegisterPage EntetACCiNf(String pass, String day, String month, String year, String name, String Lname,
                                         String company, String Add1, String Add2, String country,
-                                        String state, String city, String Zip, String mobile) throws InterruptedException {
+                                        String state, String city, String Zip, String mobile)  {
         Utility.ClickingOnElement(driver, MR);
         Utility.SendData(driver, infPass, pass);
         Utility.SendData(driver, infDays, day);
         Utility.selectingFromDropDown(driver, infMonths, month);
         Utility.selectingFromDropDown(driver, infYears, year);
+        Utility.ClickingOnElement(driver,infNewSletter);
+        Utility.ClickingOnElement(driver,infOffers);
         Utility.SendData(driver, InfFirstName, name);
         Utility.SendData(driver, InfLastName, Lname);
         Utility.SendData(driver, InfCompany, company);
@@ -104,9 +81,10 @@ public class P01_RegisterPage {
         return this;
     }
 
-    public void createACC() {
+    public P01_RegisterPage createACC() {
         Utility.scrollin(driver, InfAccCreatedBtn);
         Utility.ClickingOnElement(driver, InfAccCreatedBtn);
+        return this;
     }
 
     public String VerifyACcCreated() {
@@ -146,6 +124,7 @@ public class P01_RegisterPage {
 
     public P01_RegisterPage Logout() {
         Utility.ClickingOnElement(driver, LogoutBTN);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         return this;
     }
 

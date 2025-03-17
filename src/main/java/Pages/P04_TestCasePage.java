@@ -1,6 +1,7 @@
 package Pages;
 
 import Utilities.Utility;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,13 +12,11 @@ public class P04_TestCasePage {
     private final WebDriver driver;
 
 
-    @FindBy(css = "a[href='/test_cases']")
-    private WebElement TestCasesBtn;
+    private By TestCasesBtn = By.cssSelector("a[href='/test_cases']");
 
     public P04_TestCasePage(WebDriver driver) {
         super();
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
 

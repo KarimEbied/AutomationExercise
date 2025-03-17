@@ -1,6 +1,5 @@
 package Tests;
 
-import Pages.P02_HomePage;
 import Pages.P06_CartPage;
 import Utilities.DataUtils;
 import org.testng.Assert;

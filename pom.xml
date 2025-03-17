@@ -30,17 +30,6 @@
         <BrowserMobCore>2.1.5</BrowserMobCore>
         <allureMaven>2.12.0</allureMaven>
         <AllureApi.version>2.32.0</AllureApi.version>
-        <RegisterSuite>Test Runner/RegisterSuite.xml</RegisterSuite>
-        <LoginSuite>Test Runner/LoginSuite.xml</LoginSuite>
-        <InvalidLoginSuite>Test Runner/InValidLoginSuite.xml</InvalidLoginSuite>
-        <logoutSuite>Test Runner/LogoutSuite.xml</logoutSuite>
-        <verifyProductsSuite>Test Runner/VerifyProductsPageSuite.xml</verifyProductsSuite>
-        <verifySearchingSuite>Test Runner/VerifySearchingProductsSuite.xml</verifySearchingSuite>
-        <verifyAddingproductSuite>Test Runner/VerifyAddingProductsSuite.xml</verifyAddingproductSuite>
-        <verifyCartSuite>Test Runner/VerifyTheCartSuite.xml</verifyCartSuite>
-        <CheckoutSuite>Test Runner/CheckoutSuite.xml</CheckoutSuite>
-        <DownloadInvoiceSuite>Test Runner/DownloadingInvoiceSuite.xml</DownloadInvoiceSuite>
-        <RegressionSuite>Test Runner/RegressionSuite.xml</RegressionSuite>
     </properties>
     <build>
         <directory>test-outputs/target</directory>
@@ -69,7 +58,6 @@
                     <parallel>none</parallel>
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            ${RegressionSuite}
                         </suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>false</testFailureIgnore>
